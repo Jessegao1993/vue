@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>v-for指令</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <ul>
+            <li v-for="item in arr">
+                地区名称: {{ item }}
+            </li>
+        </ul> -->
+
+        <ul>
+            <li v-for="(item,index) in arr">
+                {{index}}地区名称: {{ item }}
+            </li>
+        </ul>
+
+        <div v-for="item in person">
+            {{item.name}}
+        </div>
+        <input type="button" value="加人" @click="addPerson" >
+        <input type="button" value="减人" @click="removePerson">
+    </div>
+
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                arr:["beijing","shanghai","guangzhou","shenzhen"],
+                person:[
+                    {name:"adam"},
+                    {name:"Bob"},
+                    {name:"Candy"}
+                ]
+            },
+            methods:{
+                addPerson:function(){
+                    this.person.push({name:"David"});
+                },
+                removePerson:function(){
+                    this.person.shift();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>图片切换</title>
+</head>
+<body>
+   
+    <div id="app">
+        <img :src="imgArr[index]" alt="">
+        <a href="javascript:void(0)" @click="prev" v-show="index!=0">
+            <img src="./left.png" alt="">
+        </a>
+        <a href="javascript:void(0)" @click="next" v-show="index<imgArr.length-1"> 
+            <img src="./right.png" alt="">
+        </a>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                imgArr:['./img1.jpg','./img2.jpg','./img3.jpg'],
+                index:0
+            },
+            methods:{
+                prev:function(){
+                    this.index--;
+                },
+                next:function(){
+                    this.index++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>v-if指令</title>
+</head>
+<body>
+    <div id="app">
+        <p v-if="isShow">现在是显示状态</p>
+        <input type="button" value="切换显示状态" @click="toggle">
+    </div>
+
+    <script>
+        /*v-show 和 v-if的相同点和不同点
+        1.共同点：都能控制元素的显示和隐藏。
+        2.不同点：实现本质⽅法不同
+        v-show本质就是通过控制css中的display设置为none，控制隐藏，只会编译⼀次；
+        v-if是动态的向DOM树内添加或者删除DOM元素，若初始值为false，就不会编译了。
+        . ⽽且v-if不停的销毁和创建⽐较消耗性能。.
+        3.总结：如果要频繁切换某节点，使⽤v-show(切换开销⽐较⼩，初始开销较⼤)。
+        . 如果不需要频繁切换某节点使⽤v-if（初始渲染开销较⼩，切换开销⽐较⼤）
+        */
+        var app = new Vue({
+            el:"#app", 
+            data:{
+                isShow:false
+            },
+            methods:{
+                toggle:function(){
+                    this.isShow = !this.isShow 
+                }
+            }
+        })
+    </script>
+</body>
+</html>

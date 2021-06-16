@@ -11,6 +11,8 @@
      <div id="app">
         <input type="button" value="v-on指令" v-on:click="sayHi">
         <input type="button" value="v-on简写" @click="sayHi">
+        <input type="button" value="v-on双击" @dblclick="sayHi">
+        <p @click="changeContent">{{ content }}</p>
      </div>
   
 
@@ -18,9 +20,15 @@
          
          var app = new Vue({
              el:"#app",
+             data:{
+                 content:"Para1"
+             },
              methods:{
                 sayHi(){
                     console.log("hi");
+                },
+                changeContent:function(){
+                    this.content += " Para2"
                 }
              }
          })
