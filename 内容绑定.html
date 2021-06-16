@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>v-text</title>
+</head>
+<body>
+     <div id="app">
+        {{message}}
+        <p v-text="message"></p>
+        <p v-html="content"></p>
+     </div>
+  
+
+     <script>
+         //v-text 内部还支持写表达式
+         //v-text 指令可以设置标签的内容，默认写法会替换全部内容，差值表达式写法可以替换指定内容
+         //v-html指令的作用是：设置元素的innerHTML，内容中有html结构会被解析为标签
+         //v-text 无论指令内容是什么都只会解析为文本
+         //解析文本使用v-text,解析html结构使用v-html
+         var app = new Vue({
+             el:"#app",
+             data:{
+                 message:"内容绑定",
+                 content:"<a href='#'>这是一个链接</a>"
+             }
+         })
+     </script>
+</body>
+</html>
