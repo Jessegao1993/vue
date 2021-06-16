@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>小黑记事本</title>
+</head>
+<body>
+    <!-- 主体区域 -->
+    <section id="todoapp">
+        <!-- 输入框 -->
+        <header class="header">
+            <h1>记事本</h1>
+            <input type="text" v-model="inputValue" @keyup.enter="add">
+        </header>
+        <!-- 列表区域 -->
+        <section class="main">
+            <ul>
+                <li v-for="(item,index) in list">
+                    <div>
+                        <span>{{index+1}}</span>
+                        <label for="">{{item}}</label>
+                        <button class="destroy" @click="remove(index)">删除</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <!-- 统计和清空 -->
+        <footer class="footer" v-show="list.length!=0">
+            <span>
+                {{list.length}} items left.
+            </span>
+            <button @click="clear">清空所有列表</button>
+        </footer>
+    </section>
+    <script>
+        var app = new Vue({
+            el:"#todoapp",
+            data:{
+                list:['todo1','todo2','todo3'],
+                inputValue:"请输入内容"
+            },
+            methods:{
+                add:function(){
+                    this.list.push(this.inputValue);
+                },
+                remove:function(index){
+                    this.list.splice(index,1);
+                },
+                clear:function(){
+                    this.list = [];
+                }
+               
+            }
+        })
+    </script>
+</body>
+</html>
