@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03数据绑定</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- vue有两种数据绑定的方式：v-bind和v-model -->
+    <div id="root">
+        <!-- 
+            v-bind是单向数据绑定, 数据只能从data流向页面，可简写为：
+        -->
+       单项数据绑定：<input type="text" v-bind:value="name"> 
+       <br>
+       <!--
+            v-model是双向数据绑定, 只能用在表单类（输入类）元素中，v-model:value可简写为v-model
+         -->
+       双向数据绑定：<input type="text" v-model:value="name">
+    </div>
+
+    
+    <script>
+        Vue.config.productionTip = false
+//el data的一种写法
+       new Vue({
+           el:'#root',
+           data:{   //data的第一种写法：对象式
+               name:"jesse"
+           }
+       })
+// 另一种写法，容器的挂载和data的函数式写法，和组件结合使用，需要写普通函数(this是vue实例)而不是箭头函数（this是window）
+/*
+       const vm = new Vue({
+            data:function(){
+                return{
+                    name:'jesse'
+                }
+            }
+
+            或
+
+            data(){
+                return{
+                    name:'jesse'
+                }
+            }
+       })
+
+       v.$mount('#root')
+*/
+    </script>
+</body>
+</html>
+
+<!-- 
+
+MVVM 
+
+view(DOM)---------------viewModel(DOM Listener & Data Bindings)-------------------------Model(Plain Js Object)
+
+
+ -->
