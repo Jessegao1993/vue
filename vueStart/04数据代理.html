@@ -8,7 +8,15 @@
     <script src="../js/vue.js"></script>
 </head>
 <body>
-   <!-- 数据代理：通过一个对象代理对另一个对象中属性的操作（读、写） -->
+   <!-- 
+       
+    数据代理：通过一个对象代理对另一个对象中属性的操作（读、写） 
+    好处：方便操作data中的数据
+    原理：
+        通过Object.defineProperty()将data对象的所有属性添加到vm上，为每个添加到VM上的属性指定一个getter和setter
+        在getter和setter内部操作data中对应的属性
+
+-->
     <div id="root">
       <h2>name:{{name}}</h2>
       <h2>address:{{address}}</h2>

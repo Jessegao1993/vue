@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08计算属性-姓名案例</title>
+    <script src="../js/vue.js"></script>
+    
+</head>
+<body>
+  <!-- 
+
+    计算属性
+        1.通过已有属性计算得来
+        2.原理：底层用Object.defineproperty方法提供的getter和setter
+        3.get函数什么时候执行
+            1. 初次读取时会执行一次
+            2. 当依赖的数据发生改变时会被再次调用
+        4.优势：与methods实现相比，内部有缓存机制，效率更高，调试方便
+        5.计算属性最终会出现在vm上，可直接读取使用
+        6.若要修改必须通过set函数响应修改，且set中要引起计算时依赖的数据发生改变
+
+   -->
+    <div id="root">
+        <!--    插值语法实现
+             姓：<input type="text" v-model="lastName"><br>
+        名：<input type="text" v-model="firstName"><br>
+        姓名：<span>{{firstName}}-{{lastName}}</span> 
+        -->
+
+
+        <!--    methods实现
+            姓：<input type="text" v-model="lastName"><br>
+        名：<input type="text" v-model="firstName"><br>
+        姓名：<span>{{fullName()}}</span> -->
+
+         
+        姓：<input type="text" v-model="lastName"><br>
+        名：<input type="text" v-model="firstName"><br>
+        姓名：<span>{{fullName}}</span>
+
+    </div>
+      
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                lastName:'Gao',
+                firstName:'Jesse'
+            },
+            computed:{//计算属性
+                fullName:{
+                    get(){//读取fullName时被调用且返回值作为fullName的值, 初次读取或所依赖的数据发生变化时调用get 
+                        return  this.firstName+'-'+this.lastName
+                    },
+                    set(value){
+                        const arr = value.split('-')
+                        this.firstName = arr[0]
+                        this.lastName = arr[1]
+                    }
+                }
+            }
+            // methods:{
+            //    fullName(){
+            //        return  this.firstName+'-'+this.lastName // methods实现
+            //    } 
+            // }
+        })
+    </script>
+</body>
+</html>
