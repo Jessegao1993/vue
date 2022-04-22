@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16列表排序</title>
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 
+
+列表过滤：
+
+ -->
+<body>
+    <div id="root"> 
+        
+        <h2>列表排序</h2>
+        <input type="text" placeholder="输入姓名" v-model="keyWord">
+        <button @click="sortType = 2">年龄升序</button>
+        <button @click="sortType = 1">年龄降序</button>
+        <button @click="sortType = 0">原顺序</button>
+        <ul>
+            <li v-for="(p,index) in filPersons" :key="index">{{p.name}}-{{p.age}}--{{p.sex}}</li>
+        </ul>
+
+       
+    </div>
+
+<script>
+
+    //用computed实现
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            keyWord:'',
+            sortType:0,//0原顺序 1降序 2升序
+            persons:[
+                {id:'001',name:"张三",age:18,sex:"female"},
+                {id:'002',name:"李三",age:19,sex:"female"},
+                {id:'003',name:"李五",age:20,sex:"male"},
+                {id:'004',name:"刘五",age:21,sex:"male"}
+            ]
+        },
+        computed:{
+            filPersons(){
+                const arr = this.persons.filter((p)=>{
+                    return p.name.indexOf(this.keyWord)!==-1;//返回过滤结果
+                })
+
+                if(this.sortType){//判断是否需要排序
+                    arr.sort((a,b)=>{
+                        return this.sortType === 1 ? b.age-a.age : a.age-b.age//选择升序还是降序
+                    })
+                }
+                return arr//返回新数组
+            }
+        },
+    })
+
+</script>
+</body>
+</html>

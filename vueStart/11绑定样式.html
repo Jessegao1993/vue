@@ -36,6 +36,17 @@
     </style>
     <script src="../js/vue.js"></script>
 </head>
+<!-- 
+
+绑定样式：
+    1.  class样式
+            写法：class="xxx" xxx可以是字符串、对象、数组
+    2.  style样式
+        :style="{fontSize:xxx}" 其中xxx是动态值
+        :style="[a,b]"，其中
+
+
+ -->
 <body>
     <div id="root">
         <!-- 绑定class样式--字符串写法，适用于样式类名不确定，需要动态指定 -->
@@ -48,6 +59,10 @@
         <br>
         <!-- 绑定class样式--对象写法，适用于要绑定的样式个数确定、名字确定但要动态决定要不要 -->
         <div class="basic" :class="classObj">{{name}}</div>
+        <br>
+        <br>
+        <!-- 绑定style样式 -->
+        <div class="basic" :style="styleObj">{{name}}</div>
     </div>
 
 <script>
@@ -62,6 +77,9 @@
             classObj:{
                 atguigu1:false,
                 atguigu2:false
+            },
+            styleObj:{
+                fontSize:'40px'
             }
         },
         methods: {
