@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 v-html指令</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+</head>
+<!-- 
+    v-html指令：
+        向指定节点中渲染包含html结构的内容
+        与插值语法的区别：
+            v-html会替换掉文本中的内容，{{x}}则不会
+            v-html可以识别html结构
+        注意：
+            在网站上动态渲染任意HTML十分危险，容易导致XSS攻击
+            一定要在可信的内容上使用v-html，不要在用户提交的内容上使用
+ -->
+<body>
+    <div id="root">
+       <div>{{name}}</div>
+       <div v-html="str"></div>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el:'#root',
+            data:{
+                name:'jessegao',
+                str:'<h3>jessegao<h3>'
+            }
+        })
+        
+    </script>
+</body>
+</html>
