@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>32 组件的概念</title>
+    
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 
+    模块：向外提供特定功能的JS程序，一般就是一个JS文件
+    组件：用来实现局部（特定）功能效果的代码集合（html/css/js/image...）
+    非单文件组件：一个文件中包含有n个组件
+    单文件组件：一个文件中只包含有1个组件
+ -->
+<body>
+    <div id="root">
+      <h2 v-bind:style="{opacity:opacity}">欢迎学习VUE</h2>
+      <button @click="stop">点我停止变换 </button>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+    
+        new Vue({
+            el:'#root',
+            data:{
+                opacity:1
+            },
+            mounted(){
+                this.timer = setInterval(() => {//重要
+                        this.opacity -= 0.01
+                        if(this.opacity<=0) this.opacity = 1
+                }, 16);
+            },
+            beforeDestroy(){
+                clearInterval(this.timer)
+            },
+            //Vue完成模版解析并把真实DOM元素放入页面后（挂载完毕）调用
+            methods:{
+                stop(){
+                   this.$destroy() 
+                }
+            }
+            
+        })
+        
+    </script>
+</body>
+</html>
