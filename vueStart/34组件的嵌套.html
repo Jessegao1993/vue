@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>34 组件的嵌套</title>
+    
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 
+    
+        
+ -->
+<body>
+    <div id="root">
+        <!-- 编写组件标签 -->
+       
+        
+    </div>
+    
+
+    <script>
+        Vue.config.productionTip = false
+        
+        // 创建person组件
+        const person = Vue.extend({
+            template:`
+            <div>
+                <h2>姓名：{{personName}}</h2>
+                <h2>年龄：{{age}}</h2>
+            </div>    
+            `,
+            //一定不要写el配置项
+            data(){
+                return {
+                    personName:'Jesse',
+                    age:30
+                }
+            }
+        })
+
+
+        // 创建home组件
+        const home = Vue.extend({
+            template:`
+            <div>
+                <h2>居住名称：{{houseName}}</h2>
+                <h2>居住地址：{{houseAddress}}</h2>
+                <hr>
+                <person></person>
+            </div>    
+            `,
+            //一定不要写el配置项
+            data(){
+                return {
+                    houseName:'xinying',
+                    houseAddress:'tongzhou'
+                }
+            },
+            components:{//注册组件
+                person
+            }
+        })
+
+        // 创建hello组件
+        const hello = Vue.extend({
+            template:`
+                <div>{{msg}}</div>
+            `,
+            data(){
+                return{
+                    msg:'hello and welcome'
+                }
+            }
+        })
+
+        // 创建app组件
+        const app = Vue.extend({
+            components:{
+                home,
+                hello
+            },
+            template:`
+                <div>
+                    <hello></hello>
+                    <home></home>
+                </div>
+            `,
+        })
+
+        //创建VM
+        new Vue({
+            el:'#root',
+            // 注册组件（局部注册）
+            components:{
+                app:app,
+                 
+            },
+            template:`
+                <app></app>
+            `
+        })
+
+    </script>
+</body>
+</html>

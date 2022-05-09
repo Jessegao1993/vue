@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>35 VueComponent构造函数</title>
+    
+    <script src="../js/vue.js"></script>
+</head>
+<!-- 
+    关于VueComponent：
+        1. home组件本质是一个名为VueComponent的构造函数，是Vue.extend生成的
+        2. 我们只需要写<home></home>或<home/>，Vue解析时会帮我们创建home组件的实例对象，即Vue帮我们执行的new VueComponent(options)
+        3. 特别注意，每次调用Vue.extend，返回的都是一个全新的VueComponent
+        4. 关于this的指向：
+            （1）组件配置中： data/watch/method/computed函数的this均是VueComponent实例对象
+            （2）.new Vue()配置中：data/watch/method/computed函数的this均是Vue实例对象
+        5. VueComponent的实例对象，简称VC，或组件实例对象，Vue实例对象简称vm
+        
+ -->
+<body>
+    <div id="root">
+        <home></home>
+    </div>
+    
+
+    <script>
+        Vue.config.productionTip = false
+        
+        
+        // 创建home组件
+        const home = Vue.extend({
+            template:`
+            <div>
+                <h2>居住名称：{{houseName}}</h2>
+                <h2>居住地址：{{houseAddress}}</h2>
+                <hr>
+                <person></person>
+            </div>    
+            `,
+            //一定不要写el配置项
+            data(){
+                return {
+                    houseName:'xinying',
+                    houseAddress:'tongzhou'
+                }
+            }
+        })
+
+
+        //创建VM
+        new Vue({
+            el:'#root',
+            // 注册组件（局部注册）
+            components:{
+              home:home      
+            },
+          
+        })
+
+    </script>
+</body>
+</html>
