@@ -1,23 +1,19 @@
 <template>
     <div class="demo">
-        <h2>姓名：{{name}}</h2>
-        <h2>年龄：{{age}}</h2>
-        <button @click="showAge">点我提示年龄</button>
+        <h1>{{msg}}</h1>
+        <h2>学生姓名：{{name}}</h2>
+        <h2>学生性别：{{sex}}</h2>
     </div>  
 </template>
 
 <script>
     export default{//直接暴露组件的配置对象，省略Vue.extend()
-        name:'StudentInfo',//组件名，与文件名一致
+        name:'Student',//组件名，与文件名一致
         data(){
             return {
+                msg:'我是一个上班族',
                 name:'Jesse',
-                age:30
-            }
-        },
-        methods:{
-            showAge(){
-                alert(this.age)
+                sex:'male'
             }
         }
     }
