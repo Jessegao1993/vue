@@ -1,6 +1,5 @@
 <template>
-    <transition name="todo" appear>
-        <li>
+    <li>
         <label>
             <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
             <span v-show="!todo.isEdit">{{todo.title}}</span>
@@ -14,8 +13,7 @@
         </label>
         <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
         <button class="btn btn-danger" @click="handleEdit(todo)" v-show="!todo.isEdit">编辑</button>
-        </li>
-    </transition>
+    </li>
 </template>
 
 <script>
@@ -60,20 +58,6 @@ export default {
 
 <style scoped>
     /*item*/
-    .todo-enter-active{
-        animation: atguigu 0.5s linear;
-    }
-    .todo-leave-active{
-        animation: atguigu 0.5s reverse;
-    }
-    @keyframes atguigu{
-        from{
-            transform: translateX(100%);
-        }
-        to{
-            transform: translateX(0px);
-        }
-    }
     li {
     list-style: none;
     height: 36px;
