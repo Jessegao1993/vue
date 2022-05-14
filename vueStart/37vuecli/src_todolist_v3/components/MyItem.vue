@@ -4,13 +4,11 @@
             <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
             <span>{{todo.title}}</span>
         </label>
-        <button class="btn btn-danger" @click="handleDelete(todo.id)">编辑</button>
         <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
     </li>
 </template>
 
 <script>
-import pubsub from 'pubsub-js'
 export default {
     name:'MyItem',
     // 声明接收todo对象
@@ -24,13 +22,9 @@ export default {
         handleDelete(id){
             if (confirm('确定删除吗？')) {
                 //this.deleteTodo(id)
-                //this.$bus.$emit('deleteTodo',id)//事件总线
-                // 重写handleDelete用消息订阅与发布
-                pubsub.publish('deleteTodo',id)//发布
+                this.$bus.$emit('deleteTodo',id)
             }
         }
-       
-
     }
 }
 </script>

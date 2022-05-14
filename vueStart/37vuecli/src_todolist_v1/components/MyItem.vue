@@ -4,33 +4,25 @@
             <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
             <span>{{todo.title}}</span>
         </label>
-        <button class="btn btn-danger" @click="handleDelete(todo.id)">编辑</button>
         <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
     </li>
 </template>
 
 <script>
-import pubsub from 'pubsub-js'
 export default {
     name:'MyItem',
     // 声明接收todo对象
-    props:['todo'],
+    props:['todo','checkTodo','deleteTodo'],
     methods:{
         handleCheck(id){
             // 通知App组件将todo对应的done值取反
-            //this.checkTodo(id)
-            this.$bus.$emit('checkTodo',id)
+            this.checkTodo(id)
         },
         handleDelete(id){
             if (confirm('确定删除吗？')) {
-                //this.deleteTodo(id)
-                //this.$bus.$emit('deleteTodo',id)//事件总线
-                // 重写handleDelete用消息订阅与发布
-                pubsub.publish('deleteTodo',id)//发布
+                this.deleteTodo(id)
             }
         }
-       
-
     }
 }
 </script>

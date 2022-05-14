@@ -13,6 +13,7 @@ export default {
             title:''
         }
     },
+    props:['addTodo'],
     methods:{
         add(){
              // 校验数据
@@ -20,7 +21,7 @@ export default {
              // 将用户的输入包装成一个todo对象
              const todoObj = {id:nanoid(),title:this.title,done:false}
              // 通知APP组件添加一个todo对象
-             this.$emit('addTodo',todoObj)
+             this.addTodo(todoObj)
              // 清空输入框 
              this.title = ''
         }

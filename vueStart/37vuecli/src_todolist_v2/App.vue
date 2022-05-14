@@ -2,9 +2,9 @@
 	<div id="root">
 		<div class="todo-container">
 			<div class="todo-wrap">
-				<MyHeader @addTodo="addTodo"/>
-				<MyList :todos="todos"/>
-				<MyFooter :todos="todos" @checkAllTodo="checkAllTodo" @clearAllTodo="clearAllTodo"/>
+				<MyHeader :addTodo="addTodo"/>
+				<MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
+				<MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllTodo="clearAllTodo"/>
 			</div>
 		</div>
 	</div>
@@ -14,7 +14,6 @@
 	import MyHeader from './components/MyHeader'
 	import MyList from './components/MyList'
 	import MyFooter from './components/MyFooter.vue'
-	import pubsub from 'pubsub-js'
 
 	export default {
 		name:'App',
@@ -37,7 +36,7 @@
 				})
 			},
 			//删除一个todo
-			deleteTodo(_,id){//_占位但不使用的参数
+			deleteTodo(id){
 				this.todos = this.todos.filter( todo => todo.id !== id )
 			},
 			//全选or取消全选
@@ -60,16 +59,6 @@
 					localStorage.setItem('todos',JSON.stringify(value))
 				}
 			}
-		},
-		mounted(){
-			this.$bus.$on('checkTodo',this.checkTodo)
-			//this.$bus.$on('deleteTodo',this.deleteTodo)
-			pubsub.subscribe('deleteTodo',this.deleteTodo)//订阅
-		},
-		beforeDestory(){
-			this.$bus.$off('checkTodo')
-			this.$bus.$off('deleteTodo')
-			pubsub.unsubscribe('deleteTodo',this.deleteTodo)//取消订阅
 		}
 	}
 </script>

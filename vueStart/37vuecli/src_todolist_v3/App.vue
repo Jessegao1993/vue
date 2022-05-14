@@ -14,7 +14,6 @@
 	import MyHeader from './components/MyHeader'
 	import MyList from './components/MyList'
 	import MyFooter from './components/MyFooter.vue'
-	import pubsub from 'pubsub-js'
 
 	export default {
 		name:'App',
@@ -37,7 +36,7 @@
 				})
 			},
 			//删除一个todo
-			deleteTodo(_,id){//_占位但不使用的参数
+			deleteTodo(id){
 				this.todos = this.todos.filter( todo => todo.id !== id )
 			},
 			//全选or取消全选
@@ -63,13 +62,11 @@
 		},
 		mounted(){
 			this.$bus.$on('checkTodo',this.checkTodo)
-			//this.$bus.$on('deleteTodo',this.deleteTodo)
-			pubsub.subscribe('deleteTodo',this.deleteTodo)//订阅
+			this.$bus.$on('deleteTodo',this.deleteTodo)
 		},
 		beforeDestory(){
 			this.$bus.$off('checkTodo')
 			this.$bus.$off('deleteTodo')
-			pubsub.unsubscribe('deleteTodo',this.deleteTodo)//取消订阅
 		}
 	}
 </script>
