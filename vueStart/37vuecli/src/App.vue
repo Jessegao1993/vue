@@ -1,122 +1,83 @@
 <template>
-	<div id="root">
-		<div class="todo-container">
-			<div class="todo-wrap">
-				<MyHeader @addTodo="addTodo"/>
-				<MyList :todos="todos"/>
-				<MyFooter :todos="todos" @checkAllTodo="checkAllTodo" @clearAllTodo="clearAllTodo"/>
+	<div id="app">
+		<div class="container">
+		  <section class="jumbotron">
+			<h3 class="jumbotron-heading">Search Github Users</h3>
+			<div>
+			  <input type="text" placeholder="enter the name you search"/>&nbsp;<button>Search</button>
 			</div>
+		  </section>
+		  <div class="row">
+			<div class="card">
+			  <a href="https://github.com/xxxxxx" target="_blank">
+				<img src="https://cn.vuejs.org/images/logo.svg" style='width: 100px'/>
+			  </a>
+			  <p class="card-text">xxxxxx</p>
+			</div>
+			<div class="card">
+			  <a href="https://github.com/xxxxxx" target="_blank">
+				<img src="https://cn.vuejs.org/images/logo.svg" style='width: 100px'/>
+			  </a>
+			  <p class="card-text">xxxxxx</p>
+			</div>
+			<div class="card">
+			  <a href="https://github.com/xxxxxx" target="_blank">
+				<img src="https://cn.vuejs.org/images/logo.svg" style='width: 100px'/>
+			  </a>
+			  <p class="card-text">xxxxxx</p>
+			</div>
+			<div class="card">
+			  <a href="https://github.com/xxxxxx" target="_blank">
+				<img src="https://cn.vuejs.org/images/logo.svg" style='width: 100px'/>
+			  </a>
+			  <p class="card-text">xxxxxx</p>
+			</div>
+			<div class="card">
+			  <a href="https://github.com/xxxxxx" target="_blank">
+				<img src="https://cn.vuejs.org/images/logo.svg" style='width: 100px'/>
+			  </a>
+			  <p class="card-text">xxxxxx</p>
+			</div>
+		  </div>
 		</div>
-	</div>
+	  </div>
 </template>
 
 <script>
-	import MyHeader from './components/MyHeader'
-	import MyList from './components/MyList'
-	import MyFooter from './components/MyFooter.vue'
-	import pubsub from 'pubsub-js'
-
 	export default {
 		name:'App',
-		components:{MyHeader,MyList,MyFooter},
-		data(){
-			return {
-				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）
-				todos:JSON.parse(localStorage.getItem('todos')) || []
-			}
-		},
-		methods: {
-			//添加一个todo
-			addTodo(todoObj){
-				this.todos.unshift(todoObj)
-			},
-			//勾选or取消勾选一个todo
-			checkTodo(id){
-				this.todos.forEach((todo)=>{
-					if(todo.id === id) todo.done = !todo.done
-				})
-			},
-			//删除一个todo
-			deleteTodo(_,id){//_占位但不使用的参数
-				this.todos = this.todos.filter( todo => todo.id !== id )
-			},
-			//全选or取消全选
-			checkAllTodo(done){
-				this.todos.forEach((todo)=>{
-					todo.done = done
-				})
-			},
-			//清除所有已经完成的todo
-			clearAllTodo(){
-				this.todos = this.todos.filter((todo)=>{
-					return !todo.done
-				})
-			},
-			updateTodo(id,title){
-				this.todos.forEach((todo)=>{
-					if(todo.id === id) todo.title = title
-				})
-			}
-		},
-		watch:{
-			todos:{
-				deep:true,
-				handler(value){
-					localStorage.setItem('todos',JSON.stringify(value))
-				}
-			}
-		},
-		mounted(){
-			this.$bus.$on('checkTodo',this.checkTodo)
-			//this.$bus.$on('deleteTodo',this.deleteTodo)
-			pubsub.subscribe('deleteTodo',this.deleteTodo)//订阅
-			this.$bus.$on('updateTodo',this.updateTodo)
-		},
-		beforeDestory(){
-			this.$bus.$off('checkTodo')
-			this.$bus.$off('deleteTodo')
-			this.$bus.$off('updateTodo')
-			pubsub.unsubscribe('deleteTodo',this.deleteTodo)//取消订阅
+		components:{
+			Mylist,
+			Search
 		}
-	}
+	}	
+	
 </script>
 
 <style>
-	/*base*/
-	body {
-		background: #fff;
-	}
-	.btn {
-		display: inline-block;
-		padding: 4px 12px;
-		margin-bottom: 0;
-		font-size: 14px;
-		line-height: 20px;
-		text-align: center;
-		vertical-align: middle;
-		cursor: pointer;
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-		border-radius: 4px;
-	}
-	.btn-danger {
-		color: #fff;
-		background-color: #da4f49;
-		border: 1px solid #bd362f;
-	}
-	.btn-danger:hover {
-		color: #fff;
-		background-color: #bd362f;
-	}
-	.btn:focus {
-		outline: none;
-	}
-	.todo-container {
-		width: 600px;
-		margin: 0 auto;
-	}
-	.todo-container .todo-wrap {
-		padding: 10px;
-		border: 1px solid #ddd;
-		border-radius: 5px;
-	}
+	.album {
+  min-height: 50rem; /* Can be removed; just added for demo purposes */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 1px solid #efefef;
+  text-align: center;
+}
+
+.card > img {
+  margin-bottom: .75rem;
+  border-radius: 100px;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
 </style>
