@@ -19,12 +19,17 @@
         },
         methods:{
           searchUsers(){
-              axios.get(`https://api.github.com/search/users?q=${this.KeyWord}`).then(
+            // 请求前更新mylist数据
+            this.$bus.$emit('upDateListData',{isFirst:false,isLoading:true,errMsg:'',users:[]})
+            axios.get(`https://api.github.com/search/users?q=${this.KeyWord}`).then(
                   response => {
-                    this.$bus.$emit('getUsers',response.data.items)//传递服务器获取的数据
+                    // 请求成功后更新mylist数据
+                    this.$bus.$emit('upDateListData',{isLoading:false,errMsg:'',users:response.data.items})
                   },
                   error => {
                     console.log('请求失败',error.message)
+                    // 请求失败后更新mylist数据
+                    this.$bus.$emit('upDateListData',{isLoading:false,errMsg:error.message,users:[]})
                   }
               )  
           }
