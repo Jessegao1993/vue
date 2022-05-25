@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div>
 		<Count/>		
 	</div>
 </template>
