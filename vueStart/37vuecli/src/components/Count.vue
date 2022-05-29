@@ -12,6 +12,7 @@
     <button @click="decrement(n)">-</button>
     <button @click="incrementOdd(n)">当前求和为奇数再加</button>
     <button @click="incrementWait(n)">等一等再加</button>
+    <h3>下方组件的总人数是：{{personList.length}}</h3>
   </div>
 </template>
 
@@ -36,7 +37,7 @@
 
         // 借助mapMutations生成对应方法，方法中会调用commit去联系mutations
         // 对象写法
-        ...mapMutations({increment:'ADD',decrement:'MINUS'}),
+        ...mapMutations('countAbout',{increment:'ADD',decrement:'MINUS'}),
         // 数组写法，模版中调用的方法也需要对应调整
         //...mapMutations(['ADD','MINUS']),
 
@@ -52,7 +53,7 @@
 
           //借助mapActions生成对应方法，方法中会调用dispatch联系actions
           //对象写法
-          ...mapActions({incrementOdd:'addOdd',incrementWait:'addWait'}),
+          ...mapActions('countAbout',{incrementOdd:'addOdd',incrementWait:'addWait'}),
           //数组写法
           // ...mapActions(['addOdd','addWait'])
           },
@@ -66,12 +67,14 @@
             // 借助mapState生成计算属性，从state中读取数据（对象写法）
             //...mapState({sum:'sum',name:'name',city:'city'})
              // 借助mapState生成计算属性，从state中读取数据（数组写法，生成计算属性名和属性名需一致）
-            ...mapState(['sum','name','city']),
+            //...mapState(['sum','name','city','personList']),
+            ...mapState('countAbout',['sum','name','city']),
+            ...mapState('personAbout',['personList']),
 
             // 借助mapGetters生成计算属性，从getters中读取数据（对象写法）
             //...mapGetters({bigSum:'bigSum'})
             // 借助mapGetters生成计算属性，从getters中读取数据（数组写法，生成计算属性名和属性名需一致）
-            ...mapGetters(['bigSum'])
+            ...mapGetters('countAbout',['bigSum'])
           }
         }
     
