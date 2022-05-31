@@ -29,7 +29,7 @@
           },
           computed:{
             // personList(){
-            //   return this.$store.state.personList
+            //   return this.$store.state.personAbout.personList
             // }
             //...mapState({personList:'personList',sum:'sum'})
             ...mapState('countAbout',['sum','name','city']),
