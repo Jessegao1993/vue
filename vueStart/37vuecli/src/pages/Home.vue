@@ -10,7 +10,12 @@
                     <router-link class="list-group-item" active-class="active" to="/home/message">Message</router-link>
                 </li>
             </ul>
-            <router-view></router-view>
+            <!-- 缓存多个路由组件 -->
+            <!-- <keep-alive :include="['News','Message']"></keep-alive> -->
+            <keep-alive include="News">
+                <router-view></router-view>
+            </keep-alive>
+            
         </div>
     </div>
 </template>

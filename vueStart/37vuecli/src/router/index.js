@@ -9,21 +9,25 @@ import News from '../pages/News.vue'
 import Detail from '../pages/Detail.vue'
 
 // 创建并暴露一个路由器
-export default new VueRouter({
+const router = new VueRouter({
      routes:[
          {
+            name:'guanyu',
             path:'/about',
             component:About
          },
          {
+            name:'zhuye',
             path:'/home',
             component:Home,
             children:[
                {
+                  name:'xinwen',
                   path:'news',
                   component:News,
                },
                {
+                  name:'xiaoxi',
                   path:'message',
                   component:Message,
                   children:[
@@ -52,3 +56,10 @@ export default new VueRouter({
      ],
 
 })
+
+// 全局前置路由守卫--初始化时被调用，每次路由切换之前被调用
+router.beforeEach((to,from,next)=>{
+   next()
+})
+
+export default router
