@@ -11,8 +11,8 @@
           <a class="list-group-item active" href="./home.html">Home</a> -->
 
           <!-- 实现路由切换 -->
-           <router-link class="list-group-item" active-class="active" to="./about">About</router-link>
-          <router-link class="list-group-item" active-class="active" to="./home">Home</router-link>
+           <router-link class="list-group-item" active-class="active" to="/about">About</router-link>
+          <router-link class="list-group-item" active-class="active" to="/home">Home</router-link>
         </div>
       </div>
       <div class="col-xs-6">
